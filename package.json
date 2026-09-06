@@ -1,0 +1,35 @@
+{
+  "name": "dsh-mobile-optimizations",
+  "version": "0.1.0",
+  "description": "Mobile UX optimizations for the DSH Web GUI: responsive settings modal (icon-only nav rail, tighter padding on narrow viewports) and a sidebar brand showing <user>@<hostname> of the harness host.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin",
+    "mobile",
+    "responsive",
+    "settings",
+    "sidebar",
+    "hostname"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/erkkimon/dsh-plugin-mobile-optimizations.git"
+  }
+}
