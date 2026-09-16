@@ -4,6 +4,9 @@
   "description": "Mobile UX optimizations for the DSH Web GUI: responsive settings modal (icon-only nav rail, tighter padding on narrow viewports) and a sidebar brand showing <user>@<hostname> of the harness host.",
   "type": "module",
   "main": "lib/index.js",
+  "scripts": {
+    "test": "node --test"
+  },
   "exports": {
     ".": "./lib/index.js",
     "./client": "./lib/client.js",
