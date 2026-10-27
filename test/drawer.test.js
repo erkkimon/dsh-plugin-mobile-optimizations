@@ -17,8 +17,12 @@ function setup() {
   const panel = new Element()
   panel.getBoundingClientRect = () => ({ width: 280 })
   panel.contains = el => el === panel
+  // Sidebar root: inline width only while wide, like the shipped SidebarRoot.
+  const root = new Element()
+  panel.firstElementChild = root
   const frame = new Element()
   frame.firstElementChild = panel
+  frame.removeAttribute = () => {}
   frame.contains = () => true
   frame.hasAttribute = () => !opened
   frame.appendChild = el => { frame.backdrop = el }
@@ -32,7 +36,7 @@ function setup() {
   const FakeDate = { now: () => now }
   const sandbox = {
     document, Element, Date: FakeDate,
-    getComputedStyle: () => ({ touchAction: 'auto' }),
+    getComputedStyle: () => ({ touchAction: 'auto', display: 'block' }),
     MutationObserver: class { observe() {} disconnect() {} },
     setTimeout: fn => { timers.push(fn); return timers.length },
     clearTimeout() {},
@@ -41,7 +45,7 @@ function setup() {
   vm.runInNewContext(source, sandbox)
   registration.factory(() => ({})).apply({
     effect: fn => cleanups.push(fn()), slots: { inject() {} },
-    layout: { toggleSidebar() { opened = !opened; toggles++ } },
+    layout: { toggleSidebar() { opened = !opened; toggles++; root.style.width = opened ? '280px' : '' } },
   })
   const chat = new Element()
   chat.parentElement = frame
@@ -51,7 +55,7 @@ function setup() {
     get opened() { return opened },
     get toggles() { return toggles },
     get offset() { const m = /translateX\((-?[\d.]+)px\)/.exec(panel.style.transform || ''); return m ? Number(m[1]) : null },
-    flush() { while (timers.length) timers.shift()() },
+    flush() { while (timers.length) { now += 16; timers.shift()() } },
     /** Press at x, move through xs (each 50 ms apart), optionally pausing before lift. */
     drag(xs, { target = chat, blocked = false, dy = 0, pause = 0, lift = true, claimed = false } = {}) {
       target.blocked = blocked
