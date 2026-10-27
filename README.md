@@ -6,6 +6,8 @@ Mobile UX optimizations for the [DeepSeek Harness](https://github.com/deepseek-a
 2. **Full-screen model picker** — on viewports narrower than 700 px the composer's model list opens as a full-width, almost full-height sheet over a dimmed backdrop. Model names are left-aligned and truncated at the end, so the start of every name — and short names — is always visible. Tap the backdrop to dismiss.
 3. **Sidebar host identity** — replaces the sidebar brand wordmark with `<user>@<hostname>` of the machine running the harness, fetched from a tiny node-side JSON route. Handy when you run multiple harness instances across hosts.
 
+4. **Off-canvas mobile sidebar** — at 700 px and below, the expanded menu slides over the chat instead of shrinking it. The closed 56 px icon rail stays available. Tap the dimmed backdrop or press Escape to close; swipe right to open or left to close. Swipes must travel at least 60 px, be predominantly horizontal, and finish within 700 ms. Buttons (including hold-to-record), editable/composer regions, dialogs, menus, horizontal scrollers and custom `touch-action: none` regions are excluded. Other plugins can opt out with `data-no-drawer-swipe`. Desktop layout is unchanged.
+
 ## Install
 
 Link the plugin into your profile:

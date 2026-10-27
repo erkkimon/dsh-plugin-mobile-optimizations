@@ -59,7 +59,7 @@ test('client bundle materializes and exposes the plugin contract', async () => {
 	assert.equal(typeof exported.apply, 'function')
 	// Cordis service injection — distinct from package.json's dsh.client.inject,
 	// which is the loader-level package list.
-	assert.deepEqual(exported.inject, ['slots'])
+	assert.deepEqual(exported.inject, ['slots', 'layout'])
 
 	// injectCss() runs at materialization, so the stylesheet is already in <head>.
 	const style = appended.find((el) => el.dataset.pluginCss === CSS_TAG_ID)
